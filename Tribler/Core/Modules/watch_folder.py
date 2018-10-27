@@ -45,9 +45,12 @@ class WatchFolder(TaskManager):
                 path = os.path.join(root, name)
                 if  name.endswith(u".torrent"):
                     LibtorrentMgr.start_download_from_uri("file://" + path)
-                if name.endswith(u".magnet"):
+                else if name.endswith(u".magnet"):
                     with open(path, 'r') as f:
                         magnet = f.read()
                     LibtorrentMgr.start_download_from_uri(magnet)
+                else:
+                    continue
+                os.remove(path)
                     
                
